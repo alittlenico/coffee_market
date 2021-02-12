@@ -1,0 +1,70 @@
+<view class="shopcart">
+
+  <!-- 头部 -->
+  <view class="shopcart-header" wx:if="{{shopcartData.length > 0}}">
+    <view class="manage fr" bindtap="manageProduct">{{isManage ? '完成' : '管理'}}</view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="pro-items">
+
+     <view class="pro-item clearfix" wx:for="{{shopcartData}}" wx:key="index">
+      <view class="fl checkbox" data-index="{{index}}" bindtap="simpleSelect">
+        <image class="auto-img icon-img" hidden="{{!item.isSelect}}" src="../../images/check.png" mode="widthFix"></image>
+      </view>
+      <view class="fl pro-img">
+        <image class="auto-img icon-img" src="{{item.img}}" mode="widthFix"></image>
+      </view>
+      <view class="fl pro-text-box">
+        <view class="pro-text">
+          <view class="pro-name">{{item.name}}</view>
+          <view class="pro-rule">{{item.rule}}</view>
+        </view>
+      </view>
+
+      <view class="fr price-count">
+
+          <view class="p-c" wx:if="{{!isManage}}">
+            <view class="price fl">￥{{item.price}}</view>
+            <view class="count-box fl clearfix">
+              <view class="fl icon" data-index="{{index}}" data-id="{{item._id}}" bindtap="decrease">
+                <image class="auto-img icon-img" src="../../images/reduce.png" mode="widthFix"></image>
+              </view>
+              <view class="fl count">{{item.count}}</view>
+              <view class="fl icon" data-index="{{index}}" data-id="{{item._id}}" bindtap="increase">
+                <image class="auto-img icon-img" src="../../images/add.png" mode="widthFix"></image>
+              </view>
+            </view>
+          </view>
+          <view class="delete" wx:else data-id="{{item._id}}" data-index="{{index}}" bindtap="removeOneShopcart">
+            <image class="auto-img icon-img" src="../../images/delete.png" mode="widthFix"></image>
+          </view>
+
+      </view>
+
+    </view>
+
+  </view>
+
+  <!-- 去结算 -->
+  <view class="bottom-box" wx:if="{{shopcartData.length > 0}}">
+    <view class="fl">
+      <view class="all-check fl" bindtap="allSelect">
+        <image class="auto-img icon-img" hidden="{{!isAllSelect}}" src="../../images/check.png" mode="widthFix"></image>
+      </view>
+      <view class="fl all-text">全选</view>
+    </view>
+
+    <view class="fr buy-box" wx:if="{{!isManage}}">
+      <view class="fl">
+        <view class="fl text">应付合计：</view>
+        <view class="fl text-price">￥{{total}}</view>
+      </view>
+      <view class="fl buy" bindtap="pay">去结算</view>
+    </view>
+
+    <!-- 全部删除 -->
+    <view class="fr all-delete" wx:else bindtap="removeSelectShopcart">删除</view>
+  </view>
+
+</view>

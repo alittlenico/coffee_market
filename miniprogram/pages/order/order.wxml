@@ -1,0 +1,41 @@
+<view class="order">
+
+  <view class="order-item" wx:for="{{orderData}}" wx:key="index">
+
+      <view class="order-title">
+        <view class="order-item-box clearfix">
+          <view class="fl order-code">{{item.id}}</view>
+          <view class="fr order-text">已完成</view>
+        </view>
+      </view>
+
+    <view class="product-box">
+
+      <view class="product-item clearfix" wx:for="{{item.products}}" wx:for-item="value" wx:for-index="idx" wx:key="idx">
+        <view class="fl pro-img">
+          <image class="auto-img" src="{{value.img}}" mode="widthFix"></image>
+        </view>
+        <view class="fl pro-name">
+          <view class="ch-name">{{value.name}}</view>
+          <view class="pro-rule">{{value.rule}}</view>
+        </view>
+        <view class="fr">
+          <view class="pro-price">￥{{value.price}}</view>
+          <view class="pro-count">x{{value.count}}</view>
+        </view>
+      </view>
+
+
+    </view>
+
+    <view class="clearfix">
+      <view class="fl order-time">{{item.orderDate}}</view>
+      <view class="fr order-box clearfix">
+        <view class="fl order-count">共 {{item.count}} 件商品 合计：</view>
+        <view class="fl order-price">￥{{item.total}}</view>
+      </view>
+    </view>
+
+  </view>
+
+</view>
